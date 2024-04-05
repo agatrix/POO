@@ -1,17 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package br.edu.ifnmg.cadastroaluno;
 
 /**
- *
- * @author agatha
+ * Código para fazer cadastro de alunos
+ * @author Gustavo
  */
 public class CadastroAluno {
 
     public static void main(String[] args) {
-        System.out.println("Hello World");
         
         Aluno a1 = new Aluno("Gustavo");
         Aluno a2 = new Aluno("Bernas");
