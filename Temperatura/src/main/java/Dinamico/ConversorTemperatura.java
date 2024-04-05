@@ -1,8 +1,9 @@
 package Dinamico;
 
 /**
- * @ 
- * @author agatha
+ * Classe que converter um valor de uma medida de 
+ * temperatura para outra; Utilizando membros dinâmicos.
+ * @author Gustavo
  */
 public class ConversorTemperatura {
     private double valor;
@@ -20,42 +21,51 @@ public class ConversorTemperatura {
         this.valor = valor;
     }
     
-    public double celsiusParaK(double valor) throws Exception {
-        if(valor < -273.15)
+    public double celsiusParaK() throws Exception {
+        if(this.valor < -273.15)
             throw new Exception("O valor passado é menor que o Zero Absoluto");
         
-        return (valor + 273.15);
+        return (this.valor + 273.15);
     }
     
-    public double celsiusParaF(double valor) throws Exception{
-        if(valor < -273.15)
+    public double celsiusParaF() throws Exception{
+        if(this.valor < -273.15)
             throw new Exception("O valor passado é menor que o Zero Absoluto");
     
-        return (valor*9/5) + 32;
+        return (this.valor*9/5) + 32;
     }
     
-    public double fahrenheitParaC(double valor) throws Exception {
-        if(valor < -459.67)
+    public double fahrenheitParaC() throws Exception {
+        if(this.valor < -459.67)
             throw new Exception("O valor passado é menor que o Zero Absoluto");
           
-        return ((valor - 32) * 5/9);
+        return ((this.valor - 32) * 5/9);
     }
     
-    public double fahrenheiParaK(double valor) throws Exception{
-        return celsiusParaK(fahrenheitParaC(valor));
+    public double fahrenheiParaK() throws Exception{
+        if(this.valor < -459.67)
+            throw new Exception("O valor passado é menor que o Zero Absoluto");
+        
+        return (this.valor-32)*5/9+273.15;
     }
     
-    public double kelvinParaC(double valor) throws Exception{
-        if(valor < 0)
+    public double kelvinParaC() throws Exception{
+        if(this.valor < 0)
             throw new Exception("O valor passado é menor que o zero absoluto");
          
-        return valor-273.15;
+        return this.valor-273.15;
     }
     
-    public double kelvinParaF(double valor) throws Exception{
-        return celsiusParaF(kelvinParaC(valor));
+    public double kelvinParaF() throws Exception{
+        if(this.valor < 0)
+            throw new Exception("O valor passado é menor que o Zero Absoluto");
+        
+        return (this.valor - 273.15)*9/5+32;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "valor de entrada = " + this.valor;
+    }
     
 }
