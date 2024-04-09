@@ -37,21 +37,22 @@ public class ValidarCpf {
             return false;
         
         
-        for(int i = digitos; i > 2; i--){
-
-            soma += (ValidarCpf.obterDigito(cpf, i)*(cout-1));
-            cout--;
-        }
-        if(soma%11==10) soma = 0;
-        if((11-(soma%11))!= ValidarCpf.obterDigito(cpf, 2)) return false;
+        for(int i = digitos; i > 2; i--)
+            soma += (ValidarCpf.obterDigito(cpf, i)*(i-1));
         
-        cout = digitos; soma = 0;
-        for(int i = digitos; i > 1; i--){
-            soma += (ValidarCpf.obterDigito(cpf, i)*cout);
-            cout--;
-        }
+        if(soma%11==10)
+            soma = 0;
+        if((11-(soma%11))!= ValidarCpf.obterDigito(cpf, 2))
+            return false;
         
-        if(soma%11==10) soma = 0;
+        soma = 0;
+        for(int i = digitos; i > 1; i--)
+            soma += (ValidarCpf.obterDigito(cpf, i)*i);
+        
+        
+        if(soma%11==10)
+            soma = 0;
+        
         return (11-(soma%11)) == ValidarCpf.obterDigito(cpf, 1);
     }
 }

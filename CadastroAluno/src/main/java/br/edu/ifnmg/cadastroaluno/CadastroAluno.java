@@ -7,7 +7,7 @@ package br.edu.ifnmg.cadastroaluno;
 public class CadastroAluno {
 
     public static void main(String[] args) {
-
+        
         try {
            Aluno a1 = new Aluno("Rogerio",54647142949);
         }
