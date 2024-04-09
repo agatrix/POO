@@ -7,12 +7,19 @@ package br.edu.ifnmg.cadastroaluno;
 public class CadastroAluno {
 
     public static void main(String[] args) {
-        
-        Aluno a1 = new Aluno("Gustavo");
-        Aluno a2 = new Aluno("Bernas");
-        Aluno a3 = new Aluno("Raffa");
-        System.out.println(a1);
-        System.out.println(a2);
-        System.out.println(a3);
+
+        try {
+           Aluno a1 = new Aluno("Rogerio",54647142949);
+        }
+        catch (Exception e) {
+           System.out.println(">> "+e.getMessage());
+        }
+
+        try {
+           Aluno a2 = new Aluno("Ari",00000000201);
+        }
+        catch (Exception e) {
+           System.out.println(">> "+e.getMessage());
+        }
     }
 }

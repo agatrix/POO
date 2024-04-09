@@ -1,5 +1,6 @@
 package br.edu.ifnmg.cadastroaluno;
 import java.time.LocalDate;
+import java.text.DecimalFormat;
 
 /**
  * Classe Aluno contém atributos que representam nome e matrícula
@@ -8,6 +9,7 @@ import java.time.LocalDate;
 public class Aluno {
     private static long novaMatricula;
     private final long matricula;
+    private long cpf;
     private String nome;
     
     /**
@@ -19,9 +21,14 @@ public class Aluno {
         novaMatricula = LocalDate.now().getYear()*10000;
     }
     
-    public Aluno(String nome) {
+    public Aluno(String nome, long cpf) throws Exception {
         this.nome = nome;
         this.matricula = novaMatricula++;
+        if(!ValidarCpf.validar(cpf)){
+            throw new Exception("CPF Invalido");
+        }
+        this.cpf = cpf;
+        System.out.println(this.nome+" cadastrado com sucesso!");
     }
  
     public String getNome() {
@@ -35,9 +42,9 @@ public class Aluno {
     
     @Override
     public String toString() {
-        return "Aluno{" +
-               "nome = " + nome +
+        
+        return "nome = " + nome +
                " matricula = " + matricula + 
-               '}';
+               " cpf = " + cpf;
     }
 }
