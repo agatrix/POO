@@ -1,6 +1,5 @@
 package br.edu.ifnmg.cadastroaluno;
 import java.time.LocalDate;
-import java.text.DecimalFormat;
 
 /**
  * Classe Aluno contém atributos que representam nome e matrícula
@@ -8,8 +7,8 @@ import java.text.DecimalFormat;
  */
 public class Aluno {
     private static long novaMatricula;
-    private final long matricula;
-    private long cpf;
+    private long matricula;
+    private Long cpf;
     private String nome;
     
     /**
@@ -23,13 +22,14 @@ public class Aluno {
     
     public Aluno(String nome, long cpf) throws Exception {
         this.nome = nome;
-        this.matricula = novaMatricula++;
-        if(!ValidarCpf.validar(cpf)){
+        if(ValidarCpf.validar(cpf)!=true){
             throw new Exception("CPF Invalido");
         }
         this.cpf = cpf;
-        System.out.println(this.nome+" cadastrado com sucesso!");
+        this.matricula = novaMatricula++;
     }
+    
+    public Aluno(){}
  
     public String getNome() {
         return nome;
@@ -38,13 +38,31 @@ public class Aluno {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public long getCpf() {
+        //Pode ser adicionado um throw/exeption para caso tente pegar um
+        //aluno com CPF invalido
+        return cpf;
+    }
+
+    public void setCpf(long cpf) throws Exception {
+        if(ValidarCpf.validar(cpf)!=true){
+            this.cpf = null;
+            throw new Exception("CPF Invalido");
+        }
+        this.matricula = novaMatricula++;
+        this.cpf = cpf;
+    }
     
     
     @Override
     public String toString() {
         
-        return "nome = " + nome +
-               " matricula = " + matricula + 
-               " cpf = " + cpf;
+        if(cpf!=null)
+            return "nome = " + nome +
+                   "\nmatricula = " + matricula + 
+                   "\ncpf = " + ValidarCpf.formatarCPF(cpf);
+        else
+            return "Aluno não cadastrado, certifique os dados";
     }
 }

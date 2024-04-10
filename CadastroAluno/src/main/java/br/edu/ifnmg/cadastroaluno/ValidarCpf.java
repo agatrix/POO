@@ -31,12 +31,12 @@ public class ValidarCpf {
     
     static boolean validar(long cpf){
         int digitos = ValidarCpf.contagemDigito(cpf);
-        int soma = 0; int cout = digitos;
+        int soma = 0;
         
         if(digitos>11)
             return false;
         
-        
+    
         for(int i = digitos; i > 2; i--)
             soma += (ValidarCpf.obterDigito(cpf, i)*(i-1));
         
@@ -54,5 +54,27 @@ public class ValidarCpf {
             soma = 0;
         
         return (11-(soma%11)) == ValidarCpf.obterDigito(cpf, 1);
+    }
+    
+    static String formatarCPF(long cpf){
+        String cpfFormatado = "";
+        int digitos = ValidarCpf.contagemDigito(cpf);
+        if(digitos<11){
+            for(int i = 11-digitos;i>0;i--){
+                cpfFormatado = ""+cpfFormatado+0;
+            }
+        }
+        cpfFormatado = ""+cpfFormatado+cpf;
+        String aux = "";
+        for(int i = 1;i<12;i++){
+            if(i==10)
+                aux = aux+"-";
+            aux = ""+aux+cpfFormatado.charAt(i-1);
+            if(i%3==0 && i!=9)
+                aux = aux+".";
+        }
+        cpfFormatado = aux;
+        
+        return cpfFormatado;
     }
 }
