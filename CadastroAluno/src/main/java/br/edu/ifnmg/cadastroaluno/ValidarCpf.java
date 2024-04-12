@@ -36,11 +36,11 @@ public class ValidarCpf {
         if(digitos>11)
             return false;
         
-    
-        for(int i = digitos; i > 2; i--)
+        for(int i = digitos; i > 2; i--){
             soma += (ValidarCpf.obterDigito(cpf, i)*(i-1));
-        
-        if(soma%11==10)
+        }
+
+        if(11-(soma%11)==10)
             soma = 0;
         if((11-(soma%11))!= ValidarCpf.obterDigito(cpf, 2))
             return false;
@@ -50,7 +50,7 @@ public class ValidarCpf {
             soma += (ValidarCpf.obterDigito(cpf, i)*i);
         
         
-        if(soma%11==10)
+        if(11-(soma%11)==10)
             soma = 0;
         
         return (11-(soma%11)) == ValidarCpf.obterDigito(cpf, 1);

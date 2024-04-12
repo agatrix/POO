@@ -10,6 +10,7 @@ public class Aluno {
     private long matricula;
     private Long cpf;
     private String nome;
+    private String senha;
     
     /**
     * Construtor estático, que define a matrícula como 20240000 e vai
@@ -20,16 +21,19 @@ public class Aluno {
         novaMatricula = LocalDate.now().getYear()*10000;
     }
     
-    public Aluno(String nome, long cpf) throws Exception {
+    public Aluno(String nome, long cpf/*, String senha*/) throws Exception {
         this.nome = nome;
         if(ValidarCpf.validar(cpf)!=true){
+            
             throw new Exception("CPF Invalido");
+            
         }
+        //Add throw para fazer execao do tipo da senha
         this.cpf = cpf;
         this.matricula = novaMatricula++;
     }
     
-    public Aluno(){}
+    public Aluno(){} //Construtor padrão vazio
  
     public String getNome() {
         return nome;
@@ -53,6 +57,15 @@ public class Aluno {
         this.matricula = novaMatricula++;
         this.cpf = cpf;
     }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) throws Exception {
+        
+        this.senha = senha;
+    }
     
     
     @Override
@@ -61,7 +74,8 @@ public class Aluno {
         if(cpf!=null)
             return "nome = " + nome +
                    "\nmatricula = " + matricula + 
-                   "\ncpf = " + ValidarCpf.formatarCPF(cpf);
+                   "\ncpf = " + ValidarCpf.formatarCPF(cpf) +
+                   "\nsenha = "; //+this.senha 
         else
             return "Aluno não cadastrado, certifique os dados";
     }
