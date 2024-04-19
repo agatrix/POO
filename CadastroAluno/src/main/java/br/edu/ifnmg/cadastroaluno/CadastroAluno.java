@@ -37,11 +37,16 @@ public class CadastroAluno {
         catch (Exception e) {
            System.out.println(">> "+e.getMessage());
         }
+        try {
+            System.out.println(a1.getCpf());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         
         System.out.println(a1);
         System.out.println(a2);
         
-        try {
+        /*try {
            Aluno a3 = new Aluno("Aggie",1163); 
            //Nao foi colocado o valor 00000001163, pois identifica com octal
            System.out.println(a3.getNome()+" cadastrado com sucesso!");
@@ -50,6 +55,6 @@ public class CadastroAluno {
         }
         catch (Exception e) {
            System.out.println(">> "+e.getMessage());
-        }
+        }*/
     }
 }

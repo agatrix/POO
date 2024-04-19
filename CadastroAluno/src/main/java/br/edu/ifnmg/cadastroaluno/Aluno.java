@@ -43,9 +43,11 @@ public class Aluno {
         this.nome = nome;
     }
 
-    public long getCpf() {
+    public long getCpf() throws Exception{
         //Pode ser adicionado um throw/exeption para caso tente pegar um
         //aluno com CPF invalido
+        if(cpf == null)
+            throw new Exception("CPF nao cadastrado!");
         return cpf;
     }
 
