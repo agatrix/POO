@@ -1,5 +1,6 @@
 package br.edu.ifnmg.cadastroaluno;
 import java.time.LocalDate;
+import jdk.jshell.spi.ExecutionControl;
 
 /**
  * Classe Aluno contém atributos que representam nome e matrícula
@@ -21,15 +22,16 @@ public class Aluno {
         novaMatricula = LocalDate.now().getYear()*10000;
     }
     
-    public Aluno(String nome, long cpf/*, String senha*/) throws Exception {
+    public Aluno(String nome, long cpf, String senha) throws Exception {
         this.nome = nome;
-        if(ValidarCpf.validar(cpf)!=true){
-            
+        if(ValidarCpf.validar(cpf)!=true){         
             throw new Exception("CPF Invalido");
-            
         }
-        //Add throw para fazer execao do tipo da senha
+        
+        if(ValidarSenha.validar(senha)!=true)
+            throw new Exception("Senha Invalida");
         this.cpf = cpf;
+        this.senha = senha;       
         this.matricula = novaMatricula++;
     }
     
@@ -56,8 +58,9 @@ public class Aluno {
             this.cpf = null;
             throw new Exception("CPF Invalido");
         }
-        this.matricula = novaMatricula++;
         this.cpf = cpf;
+        if(this.senha!=null) //Certifica se a senha foi preenchido para verificar
+            setMatricula();
     }
 
     public String getSenha() {
@@ -65,19 +68,53 @@ public class Aluno {
     }
 
     public void setSenha(String senha) throws Exception {
+        int[] vetor;
+        
+        vetor = ValidarSenha.verificacoes(senha);
+        if(vetor[0]<8 || vetor[0]>12)
+            System.out.println(">> A senha precisa ter de 8 a 12 caracteres");
+        
+        if(vetor[1]==0)
+            System.out.println(">> A senha precisa conter um caracter maiusculo");
+        
+        if(vetor[2]==0)
+            System.out.println(">> A senha precisa conter um caracter minusculo");
+        
+        if(vetor[3]==0)
+            System.out.println(">> A senha precisa conter um numero");
+        
+        if(vetor[4]==0)
+            System.out.println(">> A senha precisa conter um caracter especial");
+        
+        if(ValidarSenha.validar(senha)!=true){
+            this.senha = null;
+            throw new Exception("Senha invalida.");
+        }
         
         this.senha = senha;
+        if(this.cpf!=null) //Certifica se o cpf foi preenchido para verificar
+            setMatricula();
+    }
+
+    public long getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula() {
+        if(ValidarSenha.validar(this.senha)==true &&
+           ValidarCpf.validar(this.cpf)==true )
+            this.matricula = novaMatricula++;
     }
     
     
     @Override
     public String toString() {
         
-        if(cpf!=null)
+        if(cpf!=null && senha!=null)
             return "nome = " + nome +
                    "\nmatricula = " + matricula + 
                    "\ncpf = " + ValidarCpf.formatarCPF(cpf) +
-                   "\nsenha = "; //+this.senha 
+                   "\nsenha = " + this.senha; 
         else
             return "Aluno não cadastrado, certifique os dados";
     }

@@ -7,6 +7,12 @@ package br.edu.ifnmg.cadastroaluno;
  */
 public class ValidarCpf {
     
+    /**
+    *Esse metodo faz a contagem de digitos, caso tenha +11 digitos
+    *o CPF é invalido.
+    * @param cpf
+    * @return int
+    */
     static int contagemDigito(Long cpf){
         int contador = 0;
         while(cpf >= 1){
@@ -16,7 +22,12 @@ public class ValidarCpf {
         }   
         return contador;
     }
-    
+    /**
+     * Metodo para obter cada digito do numero obtido.
+     * @param cpf
+     * @param pos
+     * @return int
+     */
     static int obterDigito(Long cpf, int pos){
         int div = 10; int mod = 10;
         Double digito = (cpf.doubleValue()
@@ -29,6 +40,11 @@ public class ValidarCpf {
         
     }
     
+    /**
+     * Método que utiliza os calculos para validar um CPF.
+     * @param cpf
+     * @return bool
+     */
     static boolean validar(long cpf){
         int digitos = ValidarCpf.contagemDigito(cpf);
         int soma = 0;
@@ -56,6 +72,12 @@ public class ValidarCpf {
         return (11-(soma%11)) == ValidarCpf.obterDigito(cpf, 1);
     }
     
+    /**
+     * Metodo para formatar o valor long do CPF no formato de um CPF:
+     * xxx.xxx.xxx-xx.
+     * @param cpf
+     * @return String
+     */
     static String formatarCPF(long cpf){
         String cpfFormatado = "";
         int digitos = ValidarCpf.contagemDigito(cpf);
