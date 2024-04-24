@@ -16,15 +16,14 @@ public class ValidarSenha {
      * Verifica se a senha possui uma quantidade de caracteres no intervalo
      * [8,12].
      * @param senha
-     * @throws Exception
      */
     static int verificaTamanho(String senha)  {
         return senha.length();
     }
     
     /**
-     * Metódo que verifica se dentro da senha possui caracteres Maiusculos,
-     * minusculos e numero.
+     * Metódo que verifica se dentro da senha possui caracteres Maiusculos
+     * @return int
      * @param senha
      */
     static int verificaMaiusculo(char letra, int maiusculo) {
@@ -34,6 +33,11 @@ public class ValidarSenha {
         return maiusculo;
     }
     
+    /**
+     * Metódo que verifica se dentro da senha possui caracteres Minusculos
+     * @return int
+     * @param senha
+     */
     static int verificaMinusculo(char letra,int minusculo) {
         if(Character.isLowerCase(letra)){
                 minusculo++;
@@ -41,6 +45,11 @@ public class ValidarSenha {
         return minusculo;
     }
     
+    /**
+     * Metódo que verifica se dentro da senha possui numeros
+     * @return int
+     * @param senha
+     */
     static int verificaDigito(char letra, int numero) {
         if(Character.isDigit(letra)){
             numero++;
@@ -48,6 +57,11 @@ public class ValidarSenha {
         return numero;
     }
     
+    /**
+     * Metódo que verifica se dentro da senha possui caracteres Especiais
+     * @return int
+     * @param senha
+     */
     static int verificaEspecial(char letra, int especial) {
         if((int)letra> 32 && (int)letra < 48 ||
             (int)letra > 57 && (int)letra < 65){
@@ -56,6 +70,14 @@ public class ValidarSenha {
         return especial;
     } 
     
+    /**
+     * Esse metodo faz todas as verificacoes e salvar a quantidade dos 
+     * caracteres presentes na senha, para no final verificar se ela é valida
+     * em outro metodo. Alem disso armazena os valores, para lançar mensagens
+     * informando o que está faltando na senha.
+     * @param senha
+     * @return vetor
+     */
     static int[] verificacoes(String senha){
         int[] vetor = new int[5];
         int maiusculo = 0, minusculo = 0, especial = 0, numero = 0;
@@ -75,6 +97,11 @@ public class ValidarSenha {
         return vetor;
     }
     
+    /**
+     * Metodo final que valida se a senha esta valida ou não.
+     * @param senha
+     * @return boolean
+     */
     static boolean validar(String senha){
         int[] vetor;
         vetor = ValidarSenha.verificacoes(senha);
