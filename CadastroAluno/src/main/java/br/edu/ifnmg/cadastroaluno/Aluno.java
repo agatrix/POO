@@ -22,17 +22,31 @@ public class Aluno {
         novaMatricula = LocalDate.now().getYear()*10000;
     }
     
-    public Aluno(String nome, long cpf, String senha) throws Exception {
+    public Aluno(String nome, long cpf, String senha) {
+        /*Como todos os paramentros estão sendo passados por esse
+        Construtor sobrecarregado, podemos fazer o tratamento de
+        Exceptions dentro do proprio metodo. */
+        
         this.nome = nome;
-        if(ValidarCpf.validar(cpf)!=true){         
-            throw new Exception("CPF Invalido");
+        try{
+            if(ValidarCpf.validar(cpf)!=true){         
+                throw new Exception("CPF Invalido");   
+            }
+            if(ValidarSenha.validar(senha)!=true){
+                throw new Exception("Senha Invalida"); 
+            }
+            
+            this.cpf = cpf;
+            this.senha = senha;       
+            this.matricula = novaMatricula++;
+        }
+        catch(Exception e){
+            System.out.println(">> "+e.getMessage());
         }
         
-        if(ValidarSenha.validar(senha)!=true)
-            throw new Exception("Senha Invalida");
-        this.cpf = cpf;
-        this.senha = senha;       
-        this.matricula = novaMatricula++;
+        
+        
+       
     }
     
     public Aluno(){} //Construtor padrão vazio
